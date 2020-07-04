@@ -14,9 +14,8 @@ Router.get('/campgrounds', async (req, res) => {
 
 Router.post('/campgrounds', async (req, res) => {
     try {
-        const campgrounds = await Campground.create(req.body.campground)
+        const campgrounds = await Campground.create(req.body)
         res.json({ campgrounds: campgrounds })
-        res.json({ msg: 'reveived' })
     }
     catch (err) {
         res.json({ msg: 'Failed to create campground' })

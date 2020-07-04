@@ -1,0 +1,32 @@
+.profile h2 {
+    font-size: 70px;
+    line-height: normal;
+    color: rgb(64, 66, 74);
+    font-weight: 600;
+    font-family: "Josefin Sans", sans-serif;
+    text-transform: capitalize;
+  }
+  
+  .profile .general-info {
+    line-height: 1.2;
+    font-size: 48px;
+  }
+  
+  .profile p {
+    font-size: 33px;
+    line-height: 1.3;
+    color: rgb(128, 129, 129);
+    box-sizing: border-box;
+    font-weight: 400;
+  }
+  
+  .profile ul {
+    list-style: none;
+  }
+  
+  .profile ul li {
+    font-size: 24px;
+    color: #808181;
+    margin-bottom: 15px;
+  }
+  
