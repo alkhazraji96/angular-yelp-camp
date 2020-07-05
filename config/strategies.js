@@ -11,11 +11,14 @@ strategies.registerStrategy = new localStrategy(
             username: username,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
+            avatarId: req.body.avatarId,
+            avatarURL: req.body.avatarURL,
             email: req.body.email,
             password: password
         })
         try {
             const user = await User.create(newUser)
+            user.password = undefined
             done(null, user, {message: 'user Logged successfully'})
         }
         catch (err) {

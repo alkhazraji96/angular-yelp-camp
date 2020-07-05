@@ -5,6 +5,7 @@ export class campgroundModel {
         price: string;
         description: string;
         imageId: string;
+        imageURL: string;
         createdAt: Date;
     };
     public constructor(camp = {
@@ -13,6 +14,7 @@ export class campgroundModel {
         price: '',
         description: '',
         imageId: '',
+        imageURL: '',
         createdAt: new Date
       }) {
         this.campgrounds = camp

@@ -12,12 +12,16 @@ const loginURL = URL + 'login'
 export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
-  registerUser(user:UserModel) {
-    return this.httpClient.post<UserModel>(registerURL, user).toPromise()
+  registerUser(user) {
+    return this.httpClient.post<any>(registerURL, user).toPromise()
   }
   
   loginUser(user:UserModel) {
     return this.httpClient.post<UserModel>(loginURL, user).toPromise()
+  }
+
+  getAsyncToken() {
+    
   }
   
 }

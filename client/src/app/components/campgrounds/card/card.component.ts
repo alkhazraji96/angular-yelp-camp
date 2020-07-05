@@ -16,7 +16,7 @@ export class CardComponent implements OnInit {
   async ngOnInit() {
     // ngFor can't access array inside object it should be just an array
     const response = await this.campgroundService.getCampgrounds()
-    const campgrounds: campgroundModel = new campgroundModel()
+    let campgrounds: campgroundModel = new campgroundModel()
     campgrounds.campgrounds = response.campgrounds
     this.camps = campgrounds.campgrounds
   }

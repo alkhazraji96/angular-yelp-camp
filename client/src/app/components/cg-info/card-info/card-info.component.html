@@ -1,15 +1,32 @@
-<div class="card my-3">
-    <img id="card-image" src="{{camp.campgrounds.imageId}}" alt="">
+<div class="card mt-3 newFont">
     <div class="card-body">
-        <h3 class="float-right">$12.15/night</h3>
-        <h5 class="card-title"></h5>
-        <p>Submitted by: <a href="">Olivia Parker</a></p>
-        <p>16 days ago</p>
-        <p class="card-text">Royal Campground</p>
-        <div class="d-flex">
-            <a class="btn btn-warning mr-2" href="#">Edit</a>
-            <button class="btn btn-danger">Delete</button>
-            <a class="btn btn-success ml-auto" href="#">Add New Comment</a>
+        <div class="row flex-column-reverse flex-md-row">
+            <div class="col-md-6">
+                <div class="mt-2">
+                    <div class="d-flex align-items-center">
+                        <img class="circular--square" src="http://1.bp.blogspot.com/--fS3Q9my1dg/UR4nimx5UuI/AAAAAAAANAc/cpXgVu1TMqc/s1600/Beautiful-Girls-4.jpg" alt="">
+                        <div class="flex-wrap ml-2">
+                            <h4 class="mb-0">Olivia Parker</h4>
+                            <h6 class="mb-0">@olivia97</h6>
+                            <h6>16 days ago</h6>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-5">
+                        <h5 class="card-title">{{camp.campgrounds.title}}</h5>
+                        <h3 class="float-right">${{camp.campgrounds.price}}/night</h3>
+                    </div>
+                    <p>Submitted by: <a href="">Olivia Parker</a></p>
+                    <p class="card-text">{{camp.campgrounds.description}}</p>
+                    <div class="d-flex">
+                        <a class="btn btn-warning mr-2" href="#">Edit</a>
+                        <button class="btn btn-danger">Delete</button>
+                        <a class="btn btn-success ml-auto" href="#">Add New Comment</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <img src="{{camp.campgrounds.imageURL}}" alt="">
+            </div>
         </div>
     </div>
 </div>
