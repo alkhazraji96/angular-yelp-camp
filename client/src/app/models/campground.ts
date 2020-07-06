@@ -6,17 +6,15 @@ export class campgroundModel {
         description: string;
         imageId: string;
         imageURL: string;
+        author: {
+            username: string;
+            firstname: string;
+            lastname: string;
+            email: string;
+            avatarId: string;
+            avatarURL: string;
+            bio: string
+        }
         createdAt: Date;
     };
-    public constructor(camp = {
-        _id: '',
-        title: '',
-        price: '',
-        description: '',
-        imageId: '',
-        imageURL: '',
-        createdAt: new Date
-      }) {
-        this.campgrounds = camp
-    }
 }

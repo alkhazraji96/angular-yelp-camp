@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../models/user';
+import { CookieService } from 'ngx-cookie-service';
 
 const URL = 'http://192.168.10.55:3000/'
 const registerURL = URL + 'register'
@@ -11,7 +12,7 @@ const loginURL = URL + 'login'
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
   registerUser(user) {
     return this.httpClient.post<any>(registerURL, user).toPromise()
   }
@@ -21,7 +22,7 @@ export class AuthService {
   }
 
   getAsyncToken() {
-    
+    return this.cookieService.get('id_token')
   }
   
 }

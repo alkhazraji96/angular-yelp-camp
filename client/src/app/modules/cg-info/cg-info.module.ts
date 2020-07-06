@@ -5,6 +5,8 @@ import { CgInfoRoutingModule } from './cg-info-routing.module';
 import { CgInfoComponent } from 'src/app/components/cg-info/cg-info.component';
 import { CardInfoComponent } from 'src/app/components/cg-info/card-info/card-info.component';
 import { SharedModule } from '../shared/shared.module';
+import { MomentModule } from 'ngx-moment';
+
 
 
 
@@ -16,7 +18,12 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     CgInfoRoutingModule,
-    SharedModule
+    SharedModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 45
+      }
+    })
   ]
 })
 export class CgInfoModule { }

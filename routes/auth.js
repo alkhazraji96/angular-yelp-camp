@@ -16,9 +16,11 @@ Router.post('/register', upload.single('avatarId'), async (req, res, next) => {
     const usrUsername = await User.findOne({username: req.body.username})    
     if (usrUsername) {return res.json({msg: 'Username is taken'})}
     try {
-        let result = await cloudinary.uploader.upload(req.file.path, { folder: process.env.USERIMAGEDIRECTORY })
-        req.body.avatarId = result.public_id
-        req.body.avatarURL = result.secure_url
+        if (req.file) {
+            let result = await cloudinary.uploader.upload(req.file.path, { folder: process.env.USERIMAGEDIRECTORY })
+            req.body.avatarId = result.public_id
+            req.body.avatarURL = result.secure_url
+        }
         passport.authenticate('register', { session: false }, (err, user, info) => {
             if (!user) {
                 return res.send({ msg: info.message })

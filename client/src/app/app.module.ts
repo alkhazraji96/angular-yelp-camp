@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { MomentModule } from 'ngx-moment';
 
 
 export function jwtOptionsFactory(authService:AuthService) {
@@ -42,14 +43,20 @@ export function jwtOptionsFactory(authService:AuthService) {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule,JwtModule.forRoot({
+    SharedModule,
+    JwtModule.forRoot({
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
         useFactory: jwtOptionsFactory,
         deps: [AuthService]
       }
     }),
-    FormsModule
+    FormsModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 45
+      }
+    })
   ],
   providers: [AuthService, CookieService],
   bootstrap: [AppComponent]

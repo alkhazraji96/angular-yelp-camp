@@ -51,7 +51,7 @@ strategies.loginStrategy = new localStrategy(
 const opts = {jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'), secretOrKey : process.env.STRONG_SECRET}
 
 strategies.secureRoute = new JwtStrategy(opts, async(jwt_payload, done) => {
-    done(null, true)
+    done(null, jwt_payload.user)
 })
 
 module.exports = strategies

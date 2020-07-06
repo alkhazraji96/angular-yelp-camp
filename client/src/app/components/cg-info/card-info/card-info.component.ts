@@ -10,13 +10,15 @@ import { campgroundModel } from 'src/app/models/campground';
 })
 export class CardInfoComponent implements OnInit {
 
-  camp: campgroundModel = new campgroundModel()
+  camp:any = ''
+  author:any = ''
 
   constructor(private route: ActivatedRoute, private campgroundService: CampgroundsService) { }
 
   async ngOnInit() {
     const response = await this.campgroundService.infoCampgrounds(this.route.snapshot.params.id)
-    this.camp.campgrounds = response.campgrounds[0]
+    this.camp = response.campgrounds[0]
+    this.author = response.campgrounds[0].author
   }
 
 

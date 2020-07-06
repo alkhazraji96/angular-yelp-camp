@@ -6,6 +6,10 @@ CampgroundSchema = mongoose.Schema({
     imageId: { type: String },
     imageURL: { type: String },
     description: { type: String, required: true },
+    author: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+     },
     createdAt: { type: Date, default: Date.now  },
 })
 

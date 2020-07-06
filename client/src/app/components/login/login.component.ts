@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
 
   async onLoginSubmit(loginForm: NgForm) {
-    const usr = await this.authService.loginUser(loginForm.value)
-    console.log(usr)
-    
+    const user = await this.authService.loginUser(loginForm.value)
+    this.cookieService.set('id_token', user.id_token)    
   }
 
 }
