@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,8 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MomentModule } from 'ngx-moment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 export function jwtOptionsFactory(authService:AuthService) {
@@ -41,7 +44,9 @@ export function jwtOptionsFactory(authService:AuthService) {
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
     JwtModule.forRoot({
@@ -56,6 +61,9 @@ export function jwtOptionsFactory(authService:AuthService) {
       relativeTimeThresholdOptions: {
         'm': 45
       }
+    }),
+    ToastrModule.forRoot({
+      closeButton: true
     })
   ],
   providers: [AuthService, CookieService],

@@ -28,18 +28,17 @@ Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), up
         req.body.imageURL = result.secure_url
         req.body.author = req.user._id
         const campgrounds = await Campground.create(req.body)
-        res.json({ campgrounds: campgrounds })
+        res.json({ campgrounds: campgrounds, msg: 'Campground Created Successfully' })
     }
     catch (err) {
         console.log(err);
-        
         res.json({ msg: 'Failed to create campground' })
     }
 })
 
-Router.get('/campgrounds:id', async (req, res) => {
+Router.get('/campgrounds:slug', async (req, res) => {
     try {        
-        const campgrounds = await Campground.find({ _id: req.params.id }).populate('author').exec()
+        const campgrounds = await Campground.find({ slug: req.params.slug }).populate('author').exec()
         res.json({ campgrounds: campgrounds })
     }
     catch (err) {

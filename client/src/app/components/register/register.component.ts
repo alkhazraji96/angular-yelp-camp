@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router'
+
 
 @Component({
   selector: 'app-register',
@@ -13,13 +15,18 @@ export class RegisterComponent implements OnInit {
   filename = 'Choose File'
   fileSelcected: File = null
 
-  constructor(private authService: AuthService, private cookieService: CookieService) { }
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   async onRegisterSubmit(regSubmit: NgForm) {
-    const fb:FormData = new FormData()
+    const fb: FormData = new FormData()
     if (this.fileSelcected) {
       fb.append('avatarId', this.fileSelcected, this.fileSelcected.name)
     }
@@ -30,7 +37,11 @@ export class RegisterComponent implements OnInit {
     fb.append('password', regSubmit.value.password)
     fb.append('bio', regSubmit.value.bio)
     const response = await this.authService.registerUser(fb)
-    this.cookieService.set( 'id_token', response.id_token )
+
+    if (!response.id_token) { return this.toastr.error(response.msg, 'Register Status') }
+    this.cookieService.set('id_token', response.id_token)
+    this.toastr.success(response.msg, 'Welcome to YelpCamp!')
+    this.router.navigateByUrl('campgrounds')
   }
 
   onFileChange(event) {

@@ -7,6 +7,7 @@ const express = require('express'),
 const strategies = require('./config/strategies'),
     authRoutes = require('./routes/auth'),
     campgroundRoute = require('./routes/campground')
+    profileRoute = require('./routes/profile')
 
 const app = express()
 
@@ -29,5 +30,6 @@ passport.use('jwt', strategies.secureRoute)
 
 app.use(authRoutes)
 app.use(campgroundRoute)
+app.use(profileRoute)
 
 app.listen(process.env.PORT, () => console.log(`server is running at ${process.env.PORT}`))

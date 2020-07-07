@@ -14,7 +14,8 @@ export class campgroundModel {
             avatarId: string;
             avatarURL: string;
             bio: string
-        }
+        };
         createdAt: Date;
+        slug: string;
     };
 }

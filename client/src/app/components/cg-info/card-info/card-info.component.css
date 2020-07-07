@@ -3,3 +3,12 @@
     height: 100px;
     width: 100px;
   }
+  .link-style {
+    color: #212529;
+    text-decoration: none;
+    background-color: #8084A0;;
+  }
+
+  .link-style a:hover {
+    text-decoration: underline;
+  }

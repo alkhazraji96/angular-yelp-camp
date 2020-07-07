@@ -6,20 +6,8 @@ export class UserModel {
         email: string;
         avatarId: string;
         avatarURL: string;
-        bio: string
+        bio: string;
+        slug: string;
     };
-    id_token: string
-    public constructor(user = {
-        username: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        avatarId: '',
-        avatarURL: '',
-        bio: ''
-      },
-      id_token = '') {
-        this.user = user
-        this.id_token = id_token
-    }
+    id_token: string;
 }

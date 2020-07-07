@@ -7,7 +7,7 @@
                         <img class="circular--square" src="{{author.avatarURL}}" alt="">
                         <div class="flex-wrap ml-2">
                             <strong><h4 class="mb-0">{{author.firstname}} {{ author.lastname}}</h4></strong>
-                            <h6 class="mb-0">@{{author.username}}</h6>
+                            <a class="mb-0 link-style" routerLink='/users/{{author.slug}}'>@{{author.username}}</a>
                             <h6>{{camp.createdAt | amTimeAgo }}</h6>
                         </div>
                     </div>

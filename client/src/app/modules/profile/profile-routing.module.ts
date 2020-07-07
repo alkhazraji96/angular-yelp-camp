@@ -5,7 +5,7 @@ import { ProfileComponent } from 'src/app/components/profile/profile.component';
 
 
 
-const routes: Routes = [{ path: '', component: ProfileComponent }];
+const routes: Routes = [{ path: ':slug', component: ProfileComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

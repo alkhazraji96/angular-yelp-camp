@@ -7,8 +7,6 @@ import { CgNewComponent } from 'src/app/components/cg-new/cg-new.component';
 import { SharedModule } from '../shared/shared.module';
 
 
-
-
 @NgModule({
   declarations: [CgNewComponent],
   imports: [

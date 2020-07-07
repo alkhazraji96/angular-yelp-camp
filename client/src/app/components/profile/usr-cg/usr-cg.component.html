@@ -1,12 +1,12 @@
 <div class="profile mt-5">
-    <h2>Olivia's Campgrounds</h2>
+    <h2>{{user.firstname}}'s Campgrounds</h2>
     <div class="row text-center">
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor='let camp of campgrounds'>
             <div class="card mt-4">
-                <img src="https://th.bing.com/th/id/OIP.HIl1Wc3iVSGGQpR66crCAwHaK8?pid=Api&rs=1" class="card-img-top" alt="">
+                <img src="{{camp.imageURL}}" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>                                                        
-                    <a class="btn btn-primary" routerLink="/info">More Info</a>
+                    <a class="btn btn-primary" routerLink="/campgrounds/{{camp.slug}}">More Info</a>
                 </div>
             </div>
         </div>

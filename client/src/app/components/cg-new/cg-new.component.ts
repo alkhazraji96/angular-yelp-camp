@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -12,14 +13,18 @@ import { CookieService } from 'ngx-cookie-service';
 export class CgNewComponent implements OnInit {
   filename = 'Choose File'
   fileSelcected: File = null
-  
-  constructor(private campgroundService: CampgroundsService, private jwtHelper: JwtHelperService, private cookieService: CookieService) { }
+
+  constructor(
+    private campgroundService: CampgroundsService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
   }
 
   async onAtSubmit(cgNewForm: NgForm) {
-    const fb:FormData = new FormData()
+    const fb: FormData = new FormData()
     if (this.fileSelcected) {
       fb.append('imageId', this.fileSelcected, this.fileSelcected.name)
     }
@@ -27,7 +32,12 @@ export class CgNewComponent implements OnInit {
     fb.append('description', cgNewForm.value.description)
     fb.append('price', cgNewForm.value.price)
     const response = await this.campgroundService.postCampground(fb)
-    console.log(response)
+    if (response.campgrounds) {
+      this.toastr.success(response.msg, 'Success')
+      this.router.navigateByUrl('campgrounds/' + response.campgrounds.slug)
+      return
+    }
+    this.toastr.error(response.msg, 'Error')
   }
 
   onFileChange(event) {
