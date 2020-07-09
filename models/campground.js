@@ -7,11 +7,10 @@ CampgroundSchema = mongoose.Schema({
     imageId: { type: String },
     imageURL: { type: String },
     description: { type: String, required: true },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     createdAt: { type: Date, default: Date.now },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+    rating: { type: Number, default: 0 },
     slug: { type: String, unique: true }
 })
 

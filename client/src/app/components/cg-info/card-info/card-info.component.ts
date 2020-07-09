@@ -11,6 +11,7 @@ export class CardInfoComponent implements OnInit {
 
   camp:any = ''
   author:any = ''
+  rating:any = 0
 
   constructor(private activatedRoute: ActivatedRoute, private campgroundService: CampgroundsService) { }
 
@@ -18,6 +19,8 @@ export class CardInfoComponent implements OnInit {
     const response = await this.campgroundService.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
     this.camp = response.campgrounds[0]
     this.author = response.campgrounds[0].author
+    const num:Number = response.campgrounds[0].rating
+    this.rating = num.toFixed(2)
   }
 
 

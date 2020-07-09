@@ -12,3 +12,7 @@
   .link-style a:hover {
     text-decoration: underline;
   }
+
+  .checked {
+    color: orange;
+  }

@@ -13,7 +13,7 @@ cloudinary.config(Middleware.opts)
 
 Router.get('/campgrounds', async (req, res) => {
     try {
-        const campgrounds = await Campground.find({})
+        const campgrounds = await Campground.find({}).populate({ path: 'reviews', populate: { path: 'author', model: 'User' } }).exec()
         res.json({ campgrounds: campgrounds })
     }
     catch (err) {
@@ -21,8 +21,8 @@ Router.get('/campgrounds', async (req, res) => {
     }
 })
 
-Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), upload.single('imageId'), async (req, res) => {      
-    try {        
+Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), upload.single('imageId'), async (req, res) => {
+    try {
         let result = await cloudinary.uploader.upload(req.file.path, { folder: process.env.CAMPGROUNDIMAGEDIRECTORY })
         req.body.imageId = result.public_id
         req.body.imageURL = result.secure_url
@@ -37,7 +37,7 @@ Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), up
 })
 
 Router.get('/campgrounds:slug', async (req, res) => {
-    try {        
+    try {
         const campgrounds = await Campground.find({ slug: req.params.slug }).populate('author').exec()
         res.json({ campgrounds: campgrounds })
     }

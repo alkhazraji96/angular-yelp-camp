@@ -6,7 +6,9 @@
                     <div class="d-flex align-items-center">
                         <img class="circular--square" src="{{author.avatarURL}}" alt="">
                         <div class="flex-wrap ml-2">
-                            <strong><h4 class="mb-0">{{author.firstname}} {{ author.lastname}}</h4></strong>
+                            <strong>
+                                <h4 class="mb-0">{{author.firstname}} {{ author.lastname}}</h4>
+                            </strong>
                             <a class="mb-0 link-style" routerLink='/users/{{author.slug}}'>@{{author.username}}</a>
                             <h6>{{camp.createdAt | amTimeAgo }}</h6>
                         </div>
@@ -16,10 +18,20 @@
                         <h3 class="float-right">${{camp.price}}/night</h3>
                     </div>
                     <p class="card-text">{{camp.description}}</p>
+                    <div class="d-flex justify-content-between align-items-baseline mb-4">
+                        <h6>Avarage rating: {{rating}}</h6>
+                        <div class="flex-wrap">
+                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 0.5}"></span>
+                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 1.5}"></span>
+                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 2.5}"></span>
+                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 3.5}"></span>
+                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 4.5}"></span>
+                        </div>
+                    </div>
                     <div class="d-flex">
                         <a class="btn btn-warning mr-2" href="#">Edit</a>
                         <button class="btn btn-danger">Delete</button>
-                        <a class="btn btn-success ml-auto" href="#">Add New Comment</a>
+                        <a class="btn btn-success ml-auto" href="#">Add Review</a>
                     </div>
                 </div>
             </div>

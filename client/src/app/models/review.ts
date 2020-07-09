@@ -1,8 +1,10 @@
-import { Data } from '@angular/router';
-
 export class campgroundModel {
-    campgrounds: {
-        _id: string;
+    review: {
+        rating: Number;
+        text: string;
+        author: string;
+        campground: {
+            _id: string;
         title: string;
         price: string;
         description: string;
@@ -17,15 +19,9 @@ export class campgroundModel {
             avatarURL: string;
             bio: string
         };
-        reviews: {
-            rating: Number;
-            text: string;
-            author: string;
-            campground: string;
-            createdAt: Date;
+        createdAt: Date;
+        slug: string;
         }
         createdAt: Date;
-        rating: Number;
-        slug: string;
     };
 }
