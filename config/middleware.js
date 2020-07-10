@@ -1,7 +1,9 @@
+const Campground = require("../models/campground")
+
 var middlewareObj = {}
 
 middlewareObj.storage = {
-    filename: function (req, file, cb) {        
+    filename: function (req, file, cb) {
         cb(null, file.fieldname + '_' + Date.now())
     }
 }
@@ -18,6 +20,18 @@ middlewareObj.opts = {
     cloud_name: 'alkhz',
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
+}
+
+middlewareObj.ccgos = async (req, res, next) => {
+    try {
+        const foundCampground = await Campground.findOne({ slug: req.params.slug })
+        if (!foundCampground.author.equals(req.user._id)) {
+            return res.json({ msg: 'Sorry, you are not the author!' })
+        }
+        next()
+    } catch (err) {
+        res.json({ msg: 'campground not found'})
+    }
 }
 
 module.exports = middlewareObj

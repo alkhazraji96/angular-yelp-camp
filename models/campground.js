@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('./user')
 
-CampgroundSchema = mongoose.Schema({
+CampgroundSchema = new mongoose.Schema({
     title: { type: String, required: true },
     price: { type: String, required: true },
     imageId: { type: String },
@@ -19,8 +19,8 @@ CampgroundSchema.pre('save', async function (next) {
         // check if a new campground is being saved, or if the campground name is being modified
         if (this.isNew || this.isModified("title")) {
            this.slug = await generateUniqueSlug(this._id, this.title)
-           next()
         }
+        next()
      } catch (err) {
         next(err);
      }

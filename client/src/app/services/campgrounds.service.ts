@@ -23,4 +23,12 @@ export class CampgroundsService {
     return this.httpClient.get<campgroundModel>(campgroundURL + slug).toPromise()
   }
 
+  editCampground(campground, slug:string) {
+    return this.httpClient.put<any>(campgroundURL + slug, campground).toPromise()
+  }
+
+  deleteCampground(slug:string) {
+    return this.httpClient.delete<any>(campgroundURL + slug).toPromise()
+  }
+
 }

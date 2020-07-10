@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   onLogout() {
-    this.cookieService.deleteAll()
+    this.cookieService.deleteAll('/')
     this.router.navigateByUrl('campgrounds')
   }
 }
