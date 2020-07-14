@@ -17,8 +17,8 @@
                 <div class="d-flex w-100">
                     <h3 class="rounded px-1 py-1 border border-primary" style="font-size: 14px;">{{rev.text}}</h3>
                 </div>
-                <button class="btn btn-warning btn-sm mr-2">Edit</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
+                <a class="btn btn-warning btn-sm mr-2" routerLink='review/{{rev._id}}/edit'>Edit</a>
+                <button class="btn btn-danger btn-sm" (click)='onDeleteClick(rev._id)'>Delete</button>
             </div>
         </div>
     </div>

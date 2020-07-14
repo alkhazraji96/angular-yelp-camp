@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { AuthService } from 'src/app/services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router'
+import { SessionStorageService } from 'ngx-webstorage';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private cookieService: CookieService,
+    private sessionStorageService: SessionStorageService,
     private toastr: ToastrService,
     private router: Router
   ) { }
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     const response = await this.authService.registerUser(fb)
 
     if (!response.id_token) { return this.toastr.error(response.msg, 'Register Status') }
-    this.cookieService.set('id_token', response.id_token)
+    this.sessionStorageService.store('id_token', response.id_token)
     this.toastr.success(response.msg, 'Welcome to YelpCamp!')
     this.router.navigateByUrl('campgrounds')
   }

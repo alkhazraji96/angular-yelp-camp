@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { CgInfoComponent } from 'src/app/components/cg-info/cg-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CgEditComponent } from 'src/app/components/cg-edit/cg-edit.component';
+import { ReviewEditComponent } from 'src/app/components/cg-info/review-edit/review-edit.component';
 
 
 
 const routes: Routes = [
   { path: '', component: CgInfoComponent },
   { path: 'edit', component: CgEditComponent },
+  { path: 'review/:review_id/edit', component: ReviewEditComponent },
 ];
 
 @NgModule({

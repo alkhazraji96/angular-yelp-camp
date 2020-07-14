@@ -30,7 +30,21 @@ middlewareObj.ccgos = async (req, res, next) => {
         }
         next()
     } catch (err) {
-        res.json({ msg: 'campground not found'})
+        res.json({ msg: 'campground not found' })
+    }
+}
+
+middlewareObj.cros = async (req, res, next) => {
+    try {
+        const foundReview = await Review.findOne({_id: req.params.review_id})
+        if (!foundReview.author.equals(req.user._id)) {
+            return res.json({ msg: 'Sorry, you are not the author!' })
+        }
+        next()
+    } catch (err) {
+        console.log(err);
+        
+        res.json({ msg: 'cannot access secure route' })
     }
 }
 

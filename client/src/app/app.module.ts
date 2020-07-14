@@ -14,8 +14,8 @@ import { SharedModule } from './modules/shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AuthService } from './services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
 import { MomentModule } from 'ngx-moment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -48,6 +48,7 @@ export function jwtOptionsFactory(authService:AuthService) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxWebstorageModule.forRoot(),
     SharedModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {
@@ -66,7 +67,7 @@ export function jwtOptionsFactory(authService:AuthService) {
       closeButton: true
     })
   ],
-  providers: [AuthService, CookieService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

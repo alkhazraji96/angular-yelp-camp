@@ -15,7 +15,7 @@ cloudinary.config(Middleware.opts)
 
 Router.get('/campgrounds', async (req, res) => {
     try {
-        const campgrounds = await Campground.find({}).populate({ path: 'reviews', populate: { path: 'author', model: 'User' } }).exec()
+        const campgrounds = await Campground.find({})
         res.json({ campgrounds: campgrounds })
     }
     catch (err) {
@@ -39,7 +39,7 @@ Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), up
 
 Router.get('/campgrounds:slug', async (req, res) => {
     try {
-        const campgrounds = await Campground.find({ slug: req.params.slug }).populate('author').exec()
+        const campgrounds = await Campground.find({ slug: req.params.slug }).populate('author').populate({ path: 'reviews', populate: { path: 'author', model: 'User' } }).exec()
         res.json({ campgrounds: campgrounds })
     }
     catch (err) {

@@ -12,7 +12,7 @@ const strategies = require('./config/strategies'),
 
 const app = express()
 
-const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }
 mongoose.connect('mongodb://localhost/yelpcamp_mean', options)
 
 app.use(function (req, res, next) {
