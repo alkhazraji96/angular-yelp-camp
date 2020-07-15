@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms'
+import { NgForm, FormBuilder, Validators } from '@angular/forms'
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,24 +13,31 @@ import { ToastrService } from 'ngx-toastr';
 export class CgNewComponent implements OnInit {
   filename = 'Choose File'
   fileSelcected: File = null
+  cgForm = this.fb.group({
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    price: ['', Validators.required],
+    imageId: ['', Validators.required],
+  })
 
   constructor(
     private campgroundService: CampgroundsService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
   }
 
-  async onAtSubmit(cgNewForm: NgForm) {
+  async onSubmit() {
     const fb: FormData = new FormData()
     if (this.fileSelcected) {
       fb.append('imageId', this.fileSelcected, this.fileSelcected.name)
     }
-    fb.append('title', cgNewForm.value.title)
-    fb.append('description', cgNewForm.value.description)
-    fb.append('price', cgNewForm.value.price)
+    fb.append('title', this.cgForm.get('title').value)
+    fb.append('description', this.cgForm.get('description').value)
+    fb.append('price', this.cgForm.get('price').value)
     const response = await this.campgroundService.postCampground(fb)
     if (response.campgrounds) {
       this.toastr.success(response.msg, 'Success')
