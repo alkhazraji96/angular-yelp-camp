@@ -4,12 +4,13 @@ import { CampgroundsComponent } from './components/campgrounds/campgrounds.compo
 import { LandingComponent } from './components/landing/landing.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
 { path: '', component: LandingComponent },
 { path: 'campgrounds', component: CampgroundsComponent },
-{ path: 'campgrounds/new', loadChildren: () => import('./modules/cg-new/cg-new.module').then(m => m.CgNewModule) },
+{ path: 'campgrounds/new', loadChildren: () => import('./modules/cg-new/cg-new.module').then(m => m.CgNewModule), canActivate: [AuthGuard] },
 { path: 'users', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule) },
 { path: 'campgrounds/:slug', loadChildren: () => import('./modules/cg-info/cg-info.module').then(m => m.CgInfoModule) },
 { path: 'register', component: RegisterComponent },

@@ -1,43 +1,71 @@
 <app-navbar></app-navbar>
 <div class="container w-50 mt-5">
-    <div class="card card-outline-secondary mb-5">
-        <div class="card-header">
-            <h3 class="mb-0">Register new user</h3>
-        </div>
-        <div class="card-body">
-            <form (submit)="onRegisterSubmit(regSubmit)" #regSubmit='ngForm'>
-                <div class="form-group">
-                    <label for="firstname">First name</label>
-                    <input type="text" class="form-control" name="firstname" ngModel id="firstname" placeholder="Firstname" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Last name</label>
-                    <input type="text" class="form-control" name="lastname" ngModel id="lastname" placeholder="Lastname" required>
-                </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" ngModel id="username" placeholder="Username" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" ngModel id="email" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" ngModel id="password" placeholder="Password" required>
-                </div>
-                <label for="avatar">Avatar</label>
-                <div class="input-group mb-3">
-                    <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event)" class="custom-file-input" id="avatar" name="avatarId" ngModel
-                            aria-describedby="inputGroupFileAddon01" accept="image/*">
-                        <label class="custom-file-label" for="avatar">{{filename}}</label>
-                    </div>
-                </div>
-                <label for="bio">Bio</label>
-                <textarea class="form-control" id="bio" name="bio" ngModel rows="3">Description</textarea>
-                <button type="submit" class="btn btn-primary btn-lg float-right mt-4" id="btnLogin">Register</button>
-            </form>
-        </div>
+  <div class="card card-outline-secondary mb-5">
+    <div class="card-header">
+      <h3 class="mb-0">Register new user</h3>
     </div>
+    <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+        <div class="form-row">
+          <div class="col-12 mb-3">
+            <label for="validationServer01">First name</label>
+            <input type="text" class="form-control"
+              [ngClass]="{'is-valid': registerForm.get('firstname').valid && registerForm.get('firstname').touched, 'is-invalid': registerForm.get('firstname').invalid && registerForm.get('firstname').touched }"
+              formControlName="firstname" id="validationServer01" placeholder="First name">
+            <div class="invalid-feedback">Please provide a first name</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="validationServer02">Last name</label>
+            <input type="text" class="form-control"
+              [ngClass]="{'is-valid': registerForm.get('lastname').valid && registerForm.get('lastname').touched, 'is-invalid': registerForm.get('lastname').invalid && registerForm.get('lastname').touched }"
+              formControlName="lastname" id="validationServer02" placeholder="Last name">
+            <div class="invalid-feedback">Please provide a Last name</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="validationServer03">Username</label>
+            <input type="text" class="form-control" (change)='onUsernameChange()'
+              [ngClass]="{'is-valid': registerForm.get('username').valid && registerForm.get('username').touched, 'is-invalid': registerForm.get('username').invalid && registerForm.get('username').touched }"
+              formControlName="username" id="validationServer03" placeholder="Username">
+            <div *ngIf="registerForm.get('username').errors?.required" class="invalid-feedback">Please provide a username</div>
+            <div *ngIf="registerForm.get('username').errors?.usernameIsTaken" class="invalid-feedback">Username is taken</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="validationServer04">Email</label>
+            <input type="text" class="form-control"
+              [ngClass]="{'is-valid': registerForm.get('email').valid && registerForm.get('email').touched, 'is-invalid': registerForm.get('email').invalid && registerForm.get('email').touched }"
+              formControlName="email" id="validationServer04" placeholder="Email">
+            <div class="invalid-feedback">Please provide a Email</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="validationServer05">Password</label>
+            <input type="text" class="form-control"
+              [ngClass]="{'is-valid': registerForm.get('password').valid && registerForm.get('password').touched, 'is-invalid': registerForm.get('password').invalid && registerForm.get('password').touched }"
+              formControlName="password" id="validationServer05" placeholder="Password">
+            <div class="invalid-feedback">Please provide a password</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <label for="inputGroupFile01">Image</label>
+          <div class="col-12 mb-3">
+              <input type="file" (change)="onFileChange($event)" class="custom-file-input"
+                [ngClass]="{'is-valid': registerForm.get('avatarId').valid && registerForm.get('avatarId').touched, 'is-invalid': registerForm.get('avatarId').invalid && registerForm.get('avatarId').touched }"
+                formControlName="avatarId" id="inputGroupFile01" accept="image/*">
+              <label class="custom-file-label" for="inputGroupFile01">{{filename}}</label>
+            <div class="invalid-feedback">Please provide a password</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="validationServer07">Bio</label>
+            <textarea class="form-control" formControlName="bio" rows="4" id="validationServer07"></textarea>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary btn-lg float-right my-3" [disabled]="registerForm.invalid">Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
