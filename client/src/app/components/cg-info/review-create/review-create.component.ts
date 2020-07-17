@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ReviewService } from '../../../services/review.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { CampgroundsService } from 'src/app/services/campgrounds.service';
 
 
 @Component({
@@ -14,20 +15,28 @@ export class ReviewCreateComponent implements OnInit {
 
   rating: Number = 0
   text = 'Write A review...'
+  cgAuthor:any = ''
+  currentUser:any = ''
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private reviewService: ReviewService,
     private toastr: ToastrService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private campground: CampgroundsService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const response = await this.campground.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
+    this.cgAuthor = response.campgrounds[0].author._id
+    if(this.auth.getCurrentUser()) {
+      this.currentUser = this.auth.getCurrentUser()
+    }
   }
 
   async onSubmitClick() {
-    if (this.auth.getCurrentUser()) {
+    if (this.currentUser) {
       if (!this.rating) { return this.toastr.warning('Please provide a rating') }
       const newReview = {
         rating: this.rating,

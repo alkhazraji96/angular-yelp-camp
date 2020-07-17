@@ -15,7 +15,7 @@ cloudinary.config(Middleware.opts)
 
 Router.get('/campgrounds', async (req, res) => {
     try {
-        const campgrounds = await Campground.find({})
+        const campgrounds = await Campground.find({}).populate('author').exec()
         res.json({ campgrounds: campgrounds })
     }
     catch (err) {

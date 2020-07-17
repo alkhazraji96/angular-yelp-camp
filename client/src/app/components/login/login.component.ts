@@ -33,7 +33,10 @@ export class LoginComponent implements OnInit {
   async onLoginSubmit() {
     this.loading = true
     const response = await this.authService.loginUser(this.loginForm.value)
-    if (!response.id_token) { return this.toastr.error(response.msg, 'Enter Correct Credentials') }
+    if (!response.id_token) {
+      this.loading = false
+      return this.toastr.error(response.msg, 'Enter Correct Credentials')
+    }
     this.sessionStorageService.store('id_token', response.id_token)
     this.toastr.success(response.msg, 'Welcome Back!')
     this.loading = false

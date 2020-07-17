@@ -1,42 +1,42 @@
 <div class="card mt-3 newFont">
-    <div class="card-body">
-        <div class="row flex-column-reverse flex-md-row">
-            <div class="col-md-6">
-                <div class="mt-2">
-                    <div class="d-flex align-items-center">
-                        <img class="circular--square" src="{{author.avatarURL}}" alt="">
-                        <div class="flex-wrap ml-2">
-                            <strong>
-                                <h4 class="mb-0">{{author.firstname}} {{ author.lastname}}</h4>
-                            </strong>
-                            <a class="mb-0 link-style" routerLink='/users/{{author.slug}}'>@{{author.username}}</a>
-                            <h6>{{camp.createdAt | amTimeAgo }}</h6>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between mt-5">
-                        <h5 class="card-title">{{camp.title}}</h5>
-                        <h3 class="float-right">${{camp.price}}/night</h3>
-                    </div>
-                    <p class="card-text">{{camp.description}}</p>
-                    <div class="d-flex justify-content-between align-items-baseline mb-4">
-                        <h6>Avarage rating: {{rating}}</h6>
-                        <div class="flex-wrap">
-                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 0.5}"></span>
-                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 1.5}"></span>
-                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 2.5}"></span>
-                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 3.5}"></span>
-                            <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 4.5}"></span>
-                        </div>
-                    </div>
-                    <div *ngIf="cgAuth" class="d-flex">
-                        <a class="btn btn-warning mr-2" routerLink='edit'>Edit</a>
-                        <button class="btn btn-danger" (click)='onDeleteClick()'>Delete</button>
-                    </div>
-                </div>
+  <div class="card-body">
+    <div class="row flex-column-reverse flex-md-row">
+      <div class="col-md-6">
+        <div class="mt-2">
+          <div class="d-flex align-items-center">
+            <img class="circular--square" src="{{author.avatarURL}}" alt="">
+            <div class="flex-wrap ml-2">
+              <strong>
+                <h4 class="mb-0">{{author.firstname}} {{ author.lastname}}</h4>
+              </strong>
+              <a class="mb-0" routerLink='/users/{{author.slug}}'>@{{author.username}}</a>
+              <h6>{{camp.createdAt | amTimeAgo }}</h6>
             </div>
-            <div class="col-md-6 d-flex justify-content-center">
-                <img src="{{camp.imageURL}}" alt="">
+          </div>
+          <div class="d-flex justify-content-between mt-5">
+            <h2 class="card-title">{{camp.title}}</h2>
+            <h3 class="float-right">${{camp.price}}/night</h3>
+          </div>
+          <p class="card-text">{{camp.description}}</p>
+          <div class="d-flex justify-content-between align-items-baseline mb-4">
+            <h6>Avarage rating: <span *ngIf="rating > 0">{{rating}}</span><span *ngIf="rating < 1">No Rating Yet</span></h6>
+            <div class="flex-wrap">
+              <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 0.5}"></span>
+              <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 1.5}"></span>
+              <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 2.5}"></span>
+              <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 3.5}"></span>
+              <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 4.5}"></span>
             </div>
+          </div>
+          <div *ngIf="cgAuth" class="d-flex">
+            <a class="btn btn-warning mr-2" routerLink='edit'>Edit</a>
+            <button class="btn btn-danger" (click)='onDeleteClick()'>Delete</button>
+          </div>
         </div>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center">
+        <img src="{{camp.imageURL}}" alt="">
+      </div>
     </div>
+  </div>
 </div>

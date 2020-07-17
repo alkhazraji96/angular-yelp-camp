@@ -1,15 +1,16 @@
 <app-navbar></app-navbar>
-<div class="container">
-    <div class="card mt-5">
-        <div class="card-body">
-            <h3 class="mb-3">Edit the Review</h3>
-            <div class="ml-5 w-75">
-                <textarea class="form-control" [(ngModel)]="text" rows="5">Edit review...</textarea>
-            </div>
-                <div class="ml-5 w-75 d-flex justify-content-between">
-                    <ngx-stars [wholeStars]="true" (ratingOutput)='onRatingSet($event)' [size]="2" [color]="'#007BFF'" class="mt-4"></ngx-stars>
-                    <button (click)='onSubmitClick()' class="btn btn-primary float-end mt-3">Update</button>
-                </div>
+<div class="card mt-5">
+  <div class="card-body">
+    <h3 class="mb-3">Edit the Review</h3>
+    <div class="d-flex justify-content-center">
+      <div id="sm-screen" class="w-75">
+        <textarea class="form-control" [(ngModel)]="text" rows="5">Write a review...</textarea>
+        <div class="d-flex justify-content-between">
+          <ngx-stars [wholeStars]="true" (ratingOutput)='onRatingSet($event)' [size]="2" [color]="'#007BFF'" class="mt-4">
+          </ngx-stars>
+          <button (click)='onSubmitClick()' class="btn btn-success mt-3">Edit</button>
         </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -27,9 +27,7 @@ export class ReviewListComponent implements OnInit {
     const response = await this.campgroundsService.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
     this.reviews = response.campgrounds[0].reviews
     if (this.auth.getCurrentUser())
-    this.currentUser = this.auth.getCurrentUser()._id
-    console.log(this.reviews);
-    
+    this.currentUser = this.auth.getCurrentUser()._id 
     }
   async onDeleteClick(rev_id) {
     const response = await this.reviewService.deleteReview(this.activatedRoute.snapshot.params.slug, rev_id)

@@ -9,7 +9,8 @@ Router.post('/campgrounds/:slug/review', passport.authenticate('jwt', { session:
     try {
       const campground = await Campground.findOne({ slug: req.params.slug }).populate('reviews').exec()
       const userReview = campground.reviews.some((review) => {return review.author.equals(req.user._id)})
-        if (userReview) { return res.json({ msg: 'You can submit review only once!', success: false }) }
+        if (userReview) { return res.json({ msg: 'You can submit a review only once!', success: false }) }
+        if (campground.author == req.user._id) { return res.json({ msg: 'You cannot submit a review on your own post', success: false }) }
         newReview = new Review({
             text: req.body.text,
             rating: req.body.rating,

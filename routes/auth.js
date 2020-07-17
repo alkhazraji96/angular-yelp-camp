@@ -12,6 +12,7 @@ cloudinary.config(Middleware.opts)
 
 Router.post('/register', upload.single('avatarId'), async (req, res, next) => {
   if (req.body.checkUsername) {
+    req.body.checkUsername = checkUsername.toLowerCase()
     const username = await User.findOne({ username: req.body.checkUsername })
     if (username) {
       return res.json({ available: false })
@@ -19,8 +20,10 @@ Router.post('/register', upload.single('avatarId'), async (req, res, next) => {
     return res.json({ available: true })
   }
 
+  req.body.email = req.body.email.toLowerCase()
   const usrEmail = await User.findOne({ email: req.body.email })
   if (usrEmail) { return res.json({ msg: 'User already exists' }) }
+  req.body.username = req.body.username.toLowerCase()
   const usrUsername = await User.findOne({ username: req.body.username })
   if (usrUsername) { return res.json({ msg: 'Username is taken' }) }
   try {
@@ -44,6 +47,7 @@ Router.post('/register', upload.single('avatarId'), async (req, res, next) => {
 })
 
 Router.post('/login', (req, res, next) => {
+  req.body.username = req.body.username.toLowerCase()
   passport.authenticate('login', { session: false }, (err, user, info) => {
     if (err) { console.log(err) }
     if (!user) { return res.send({ msg: info.message }) }

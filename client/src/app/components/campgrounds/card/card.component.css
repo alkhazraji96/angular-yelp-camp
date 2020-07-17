@@ -1,3 +1,8 @@
 .checked {
     color: orange;
 }
+
+h6 {
+  font-size: small;
+  font-weight: 600;
+}

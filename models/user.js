@@ -7,11 +7,11 @@ const UserSchema = mongoose.Schema({
   lastname: { type: String, require: true },
   email: { type: String, require: true, unique: true },
   password: { type: String, require: true, select: false },
-  avatarId: { type: String },
-  avatarURL: { type: String },
+  avatarId: { type: String, require: true, },
+  avatarURL: { type: String, require: true, },
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
-  bio: { type: String },
+  bio: { type: String, require: true, },
   slug: { type: String, unique: true }
 })
 
@@ -25,7 +25,6 @@ UserSchema.pre('save', async function (next) {
     this.slug = await generateUniqueSlug(this._id, this.username)
     next()
   } catch (err) { return }
-
 })
 
 UserSchema.methods.isValidPassword = async function (password) {
@@ -38,22 +37,16 @@ module.exports = User
 async function generateUniqueSlug(id, userUsername, slug) {
   try {
     // generate the initial slug
-    if (!slug) {
-      slug = slugify(userUsername);
-    }
+    if (!slug) { slug = slugify(userUsername) }
     // check if a user with the slug already exists
-    var user = await User.findOne({ slug: slug });
+    var user = await User.findOne({ slug: slug })
     // check if a user was found or if the found user is the current user
-    if (!user || user._id.equals(id)) {
-      return slug;
-    }
+    if (!user || user._id.equals(id)) { return slug }
     // if not unique, generate a new slug
-    var newSlug = slugify(userUsername);
+    var newSlug = slugify(userUsername)
     // check again by calling the function recursively
-    return await generateUniqueSlug(id, userUsername, newSlug);
-  } catch (err) {
-    throw new Error(err);
-  }
+    return await generateUniqueSlug(id, userUsername, newSlug)
+  } catch (err) { throw new Error(err) }
 }
 
 

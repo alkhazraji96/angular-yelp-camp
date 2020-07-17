@@ -20,7 +20,7 @@ export class CampgroundsService {
   }
 
   infoCampgrounds(slug: string) {
-    return this.httpClient.get<campgroundModel>(campgroundURL + slug).toPromise()
+    return this.httpClient.get<any>(campgroundURL + slug).toPromise()
   }
 
   editCampground(campground, slug: string) {

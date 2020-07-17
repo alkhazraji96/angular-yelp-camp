@@ -38,3 +38,9 @@
       transform: rotate(360deg);
   }
 }
+
+@media (max-width: 575.98px) {
+  #sm-screen {
+    min-width: 100%;
+  }
+}

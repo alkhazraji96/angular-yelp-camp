@@ -19,6 +19,6 @@ export class CardComponent implements OnInit {
     const response = await this.campgroundService.getCampgrounds()
     let campgrounds: campgroundModel = new campgroundModel()
     campgrounds.campgrounds = response.campgrounds
-    this.camps = campgrounds.campgrounds
+    this.camps = campgrounds.campgrounds    
   }
 }
