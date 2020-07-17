@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -14,12 +15,14 @@ export class CardInfoComponent implements OnInit {
   camp: any = ''
   author: any = ''
   rating: any = 0
+  cgAuth = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private campgroundService: CampgroundsService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   async ngOnInit() {
@@ -28,6 +31,7 @@ export class CardInfoComponent implements OnInit {
     this.author = response.campgrounds[0].author
     const num: Number = response.campgrounds[0].rating
     this.rating = num.toFixed(2)
+    this.cgAuth = this.authenticateUser()
   }
 
   async onDeleteClick() {
@@ -37,5 +41,15 @@ export class CardInfoComponent implements OnInit {
     this.router.navigateByUrl('campgrounds')
   }
 
-
+  authenticateUser() {
+    if (this.authService.getCurrentUser()) {
+      const currentUser = this.authService.getCurrentUser()._id
+      const cgOwner = this.camp.author._id
+      if (currentUser == cgOwner) {
+        return true
+      }
+      return false
+    }
+    return false
+  }
 }

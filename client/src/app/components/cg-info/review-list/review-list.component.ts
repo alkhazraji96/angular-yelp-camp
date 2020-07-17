@@ -3,6 +3,7 @@ import { CampgroundsService } from '../../../services/campgrounds.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReviewService } from 'src/app/services/review.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -12,18 +13,24 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ReviewListComponent implements OnInit {
   reviews:any = ''
+  currentUser:any = ''
   constructor(
     private campgroundsService: CampgroundsService,
     private reviewService: ReviewService,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
     ) { }
 
   async ngOnInit() {
     const response = await this.campgroundsService.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
     this.reviews = response.campgrounds[0].reviews
-  }
+    if (this.auth.getCurrentUser())
+    this.currentUser = this.auth.getCurrentUser()._id
+    console.log(this.reviews);
+    
+    }
   async onDeleteClick(rev_id) {
     const response = await this.reviewService.deleteReview(this.activatedRoute.snapshot.params.slug, rev_id)
     if (!response.success) { return this.toastr.error('Failed to delete the Review', 'Error') }
@@ -31,6 +38,5 @@ export class ReviewListComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/campgrounds/' + this.activatedRoute.snapshot.params.slug]);
-  }
-  
+  }  
 }

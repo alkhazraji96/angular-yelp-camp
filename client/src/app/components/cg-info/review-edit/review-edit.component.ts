@@ -27,6 +27,7 @@ export class ReviewEditComponent implements OnInit {
     this.rating = event
   }
   async onSubmitClick() {
+    if(!this.rating) { return this.toastr.warning('Please provide a rating')}
     const updatedReview = { text: this.text, rating: this.rating }
     const response = await this.reviewService.editReview(this.activatedRoute.snapshot.params.slug, this.activatedRoute.snapshot.params.review_id, updatedReview)
     if (!response.success) { return this.toastr.error('Failed to update the Review', 'Error') }

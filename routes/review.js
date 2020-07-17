@@ -7,9 +7,9 @@ Review = require('../models/review')
 
 Router.post('/campgrounds/:slug/review', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        const checkReview = await Review.findOne({ author: req.user._id })
-        if (checkReview) { return res.json({ msg: 'You can submit review only once!', success: false }) }
-        var campground = await Campground.findOne({ slug: req.params.slug }).populate('reviews').exec()
+      const campground = await Campground.findOne({ slug: req.params.slug }).populate('reviews').exec()
+      const userReview = campground.reviews.some((review) => {return review.author.equals(req.user._id)})
+        if (userReview) { return res.json({ msg: 'You can submit review only once!', success: false }) }
         newReview = new Review({
             text: req.body.text,
             rating: req.body.rating,

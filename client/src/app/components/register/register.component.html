@@ -62,7 +62,12 @@
             <textarea class="form-control" formControlName="bio" rows="4" id="validationServer07"></textarea>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary btn-lg float-right my-3" [disabled]="registerForm.invalid">Register</button>
+            <div class="d-flex justify-content-end">
+              <div class=" my-3">
+                <div *ngIf="loading" class="align-middle lds-ring"><div></div><div></div><div></div><div></div></div>
+                <button class="btn btn-primary btn-lg" [disabled]="registerForm.invalid || loading">Register</button>
+              </div>
+            </div>
           </div>
         </div>
       </form>

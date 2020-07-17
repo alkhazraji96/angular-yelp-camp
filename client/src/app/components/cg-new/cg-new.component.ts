@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class CgNewComponent implements OnInit {
   filename = 'Choose File'
   fileSelcected: File = null
+  loading:boolean = false
+
   cgForm = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
@@ -31,6 +33,7 @@ export class CgNewComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.loading = true
     const fb: FormData = new FormData()
     if (this.fileSelcected) {
       fb.append('imageId', this.fileSelcected, this.fileSelcected.name)
@@ -39,6 +42,7 @@ export class CgNewComponent implements OnInit {
     fb.append('description', this.cgForm.get('description').value)
     fb.append('price', this.cgForm.get('price').value)
     const response = await this.campgroundService.postCampground(fb)
+    this.loading = false
     if (response.campgrounds) {
       this.toastr.success(response.msg, 'Success')
       this.router.navigateByUrl('campgrounds/' + response.campgrounds.slug)

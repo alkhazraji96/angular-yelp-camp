@@ -13,6 +13,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 })
 export class LoginComponent implements OnInit {
   loginForm:any
+  loading:boolean = false
 
   constructor(
     private authService: AuthService,
@@ -30,10 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   async onLoginSubmit() {
+    this.loading = true
     const response = await this.authService.loginUser(this.loginForm.value)
     if (!response.id_token) { return this.toastr.error(response.msg, 'Enter Correct Credentials') }
     this.sessionStorageService.store('id_token', response.id_token)
     this.toastr.success(response.msg, 'Welcome Back!')
+    this.loading = false
     this.router.navigateByUrl('campgrounds')
   }
 

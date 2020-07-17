@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
 
   filename: string = 'Choose File'
   fileSelcected: File = null
+  loading:boolean = false
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -41,6 +42,7 @@ export class RegisterComponent implements OnInit {
   }
 
   async onRegisterSubmit() {
+    this.loading = true
     const fb: FormData = new FormData()
     fb.append('avatarId', this.fileSelcected, this.fileSelcected.name)
     fb.append('username', this.registerForm.get('username').value)
@@ -53,6 +55,7 @@ export class RegisterComponent implements OnInit {
     if (!response.id_token) { return this.toastr.error(response.msg, 'Register Status') }
     this.sessionStorageService.store('id_token', response.id_token)
     this.toastr.success(response.msg, 'Welcome to YelpCamp!')
+    this.loading = false
     this.router.navigateByUrl('campgrounds')
   }
   async onUsernameChange() {
