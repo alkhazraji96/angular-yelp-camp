@@ -53,8 +53,4 @@ Router.post('/login', (req, res, next) => {
   })(req, res, next)
 })
 
-Router.get('/profile', (req, res) => {
-  res.json({ msg: 'made it to secure route' })
-})
-
 module.exports = Router

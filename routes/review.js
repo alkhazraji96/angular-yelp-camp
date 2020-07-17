@@ -1,10 +1,8 @@
 const Router = require('express').Router(),
     passport = require('passport')
 
-const User = require('../models/user'),
     Campground = require('../models/campground')
 const middlewareObj = require('../config/middleware')
-const { findOne } = require('../models/user')
 Review = require('../models/review')
 
 Router.post('/campgrounds/:slug/review', passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -47,7 +45,6 @@ Router.put("/campgrounds/:slug/review/:review_id", passport.authenticate('jwt', 
         res.json({ review: updatedReview, success: true })
     } catch (err) {
         console.log(err);
-
         res.json({ success: false })
     }
 })

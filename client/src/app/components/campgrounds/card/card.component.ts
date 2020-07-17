@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
 import { campgroundModel } from 'src/app/models/campground';
@@ -10,7 +10,8 @@ import { campgroundModel } from 'src/app/models/campground';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  camps:any
+  camps: any
+  @Input() cgFilter: any = ''
   constructor(private campgroundService: CampgroundsService) { }
 
   async ngOnInit() {

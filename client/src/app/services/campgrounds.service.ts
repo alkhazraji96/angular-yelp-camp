@@ -8,7 +8,7 @@ const campgroundURL = 'http://192.168.10.55:3000/campgrounds'
   providedIn: 'root'
 })
 export class CampgroundsService {
-
+  cgFilter:any = { title: '' }
   constructor(private httpClient: HttpClient) { }
 
   getCampgrounds() {
@@ -19,15 +19,15 @@ export class CampgroundsService {
     return this.httpClient.post<any>(campgroundURL, campground).toPromise()
   }
 
-  infoCampgrounds(slug:string) {
+  infoCampgrounds(slug: string) {
     return this.httpClient.get<campgroundModel>(campgroundURL + slug).toPromise()
   }
 
-  editCampground(campground, slug:string) {
+  editCampground(campground, slug: string) {
     return this.httpClient.put<any>(campgroundURL + slug, campground).toPromise()
   }
 
-  deleteCampground(slug:string) {
+  deleteCampground(slug: string) {
     return this.httpClient.delete<any>(campgroundURL + slug).toPromise()
   }
 

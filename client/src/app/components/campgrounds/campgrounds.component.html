@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <app-jumbotron></app-jumbotron>
-    <app-card></app-card>
+  <app-jumbotron (filterOutput)="onKeyup($event)"></app-jumbotron>
+  <app-card [cgFilter]="cgFilter"></app-card>
 </div>

@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<div class="container w-50 mt-5">
+  <div class="card card-outline-secondary mb-5">
+    <div class="card-header">
+      <h3 class="mb-0">Reset Password</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="resetForm" (ngSubmit)="onResetSubmit()">
+        <div class="form-row">
+          <div class="col-12">
+            <label for="validationServer01">Send Reset Password Email</label>
+            <input type="text" class="form-control" formControlName='email'
+            [ngClass]="{'is-invalid': resetForm.get('email').invalid && resetForm.get('email').touched}"
+            id="validationServer01" placeholder="Email">
+            <div class="invalid-feedback">Please provide an Email</div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-lg float-right mt-4" type="submit"
+        [disabled]='resetForm.invalid'>Send</button>
+      </form>
+    </div>
+  </div>
+</div>

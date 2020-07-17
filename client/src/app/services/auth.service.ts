@@ -35,6 +35,18 @@ export class AuthService {
     return null
   }
 
+  resetPasswordEmail(email: Object) {
+    return this.httpClient.post<any>(URL + 'reset-password', email).toPromise()
+  }
+
+  verifyTokenPassword(token:string) {
+    return this.httpClient.get<any>(URL + 'reset-password/' + token).toPromise()
+  }
+
+  newPassword(password:Object, token: string) {
+    return this.httpClient.post<any>(URL + 'reset-password/' + token, password).toPromise()
+  }
+
   onLogout() {
     this.sessionStorageService.clear('id_token')
     this.router.navigateByUrl('campgrounds')

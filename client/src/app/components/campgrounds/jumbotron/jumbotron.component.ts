@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-jumbotron',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jumbotron.component.css']
 })
 export class JumbotronComponent implements OnInit {
+  @Output() filterOutput: any = new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onKeyup(event) {
+    const cgFilter = { title: event.target.value }
+    this.filterOutput.emit(cgFilter)
   }
 
 }

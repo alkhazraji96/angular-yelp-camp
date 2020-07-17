@@ -37,12 +37,12 @@
             <input type="text" class="form-control"
               [ngClass]="{'is-valid': registerForm.get('email').valid && registerForm.get('email').touched, 'is-invalid': registerForm.get('email').invalid && registerForm.get('email').touched }"
               formControlName="email" id="validationServer04" placeholder="Email">
-            <div class="invalid-feedback">Please provide a Email</div>
+            <div class="invalid-feedback">Please provide an Email</div>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="col-12 mb-3">
             <label for="validationServer05">Password</label>
-            <input type="text" class="form-control"
+            <input type="password" class="form-control"
               [ngClass]="{'is-valid': registerForm.get('password').valid && registerForm.get('password').touched, 'is-invalid': registerForm.get('password').invalid && registerForm.get('password').touched }"
               formControlName="password" id="validationServer05" placeholder="Password">
             <div class="invalid-feedback">Please provide a password</div>

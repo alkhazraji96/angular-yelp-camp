@@ -8,7 +8,8 @@ const strategies = require('./config/strategies'),
     authRoutes = require('./routes/auth'),
     campgroundRoute = require('./routes/campground')
     profileRoute = require('./routes/profile')
-    reviewRoute = require('./routes/review')
+    reviewRoute = require('./routes/review'),
+    resetPassRoute = require('./routes/reset-pass')
 
 const app = express()
 
@@ -33,5 +34,6 @@ app.use(authRoutes)
 app.use(campgroundRoute)
 app.use(profileRoute)
 app.use(reviewRoute)
+app.use(resetPassRoute)
 
 app.listen(process.env.PORT, () => console.log(`server is running at ${process.env.PORT}`))
