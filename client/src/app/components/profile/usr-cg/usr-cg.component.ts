@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from 'src/app/services/profile.service';
 import { ActivatedRoute } from '@angular/router';
+
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-usr-cg',

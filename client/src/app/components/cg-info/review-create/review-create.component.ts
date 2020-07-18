@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReviewService } from '../../../services/review.service';
+
 import { ToastrService } from 'ngx-toastr';
+import { ReviewService } from 'src/app/services/review.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
 
@@ -15,8 +16,8 @@ export class ReviewCreateComponent implements OnInit {
 
   rating: Number = 0
   text = 'Write A review...'
-  cgAuthor:any = ''
-  currentUser:any = ''
+  cgAuthor: any = ''
+  currentUser: any = ''
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,7 +31,7 @@ export class ReviewCreateComponent implements OnInit {
   async ngOnInit() {
     const response = await this.campground.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
     this.cgAuthor = response.campgrounds[0].author._id
-    if(this.auth.getCurrentUser()) {
+    if (this.auth.getCurrentUser()) {
       this.currentUser = this.auth.getCurrentUser()
     }
   }

@@ -34,14 +34,21 @@
           </div>
           <div class="col-12 mb-3">
             <label for="validationServer03">Description</label>
-            <textarea class="form-control" [ngClass]="{'is-valid': cgForm.get('description').valid && cgForm.get('description').touched, 'is-invalid': cgForm.get('description').invalid && cgForm.get('description').touched }" formControlName="description" rows="4" id="validationServer03"></textarea>
+            <textarea class="form-control"
+              [ngClass]="{'is-valid': cgForm.get('description').valid && cgForm.get('description').touched, 'is-invalid': cgForm.get('description').invalid && cgForm.get('description').touched }"
+              formControlName="description" rows="4" id="validationServer03"></textarea>
             <div class="invalid-feedback">Please provide a Description</div>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="col-12">
             <div class="d-flex justify-content-end">
               <div class=" my-3">
-                <div *ngIf="loading" class="align-middle lds-ring"><div></div><div></div><div></div><div></div></div>
+                <div *ngIf="loading" class="align-middle lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
                 <button class="btn btn-primary btn-lg" [disabled]="cgForm.invalid || loading">Create</button>
               </div>
             </div>

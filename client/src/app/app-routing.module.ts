@@ -8,6 +8,7 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PassResetComponent } from './components/pass-reset/pass-reset.component';
 import { NewPassComponent } from './components/new-pass/new-pass.component';
 import { PassVerifyTokenComponent } from './components/pass-verify-token/pass-verify-token.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
 { path: 'reset-password', component: PassResetComponent },
 { path: 'reset-password/:token', component: PassVerifyTokenComponent },
 { path: 'reset-password/:token/new-password', component: NewPassComponent },
+{ path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

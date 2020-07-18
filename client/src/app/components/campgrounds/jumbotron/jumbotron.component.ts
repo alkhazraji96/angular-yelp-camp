@@ -6,7 +6,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./jumbotron.component.css']
 })
 export class JumbotronComponent implements OnInit {
-  @Output() filterOutput: any = new EventEmitter()
+  @Output() filterOutput = new EventEmitter()
 
   constructor() { }
 

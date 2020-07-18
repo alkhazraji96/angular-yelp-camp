@@ -15,5 +15,4 @@ export class UsrDetailsComponent implements OnInit {
   async ngOnInit() {
     this.user = (await this.profileService.getProfile(this.activatedRoute.snapshot.params.slug)).user
   }  
-
 }

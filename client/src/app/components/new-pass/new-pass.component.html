@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container w-50 mt-5">
+<div id="sm-screen"class="container w-50 mt-5">
   <div class="card card-outline-secondary mb-5">
     <div class="card-header">
       <h3 class="mb-0">Create New Password</h3>
@@ -10,13 +10,22 @@
           <div class="col-12">
             <label for="validationServer01">New Password</label>
             <input type="password" class="form-control" formControlName='password'
-            [ngClass]="{'is-invalid': resetForm.get('password').invalid && resetForm.get('password').touched}"
-            id="validationServer01" placeholder="password">
+              [ngClass]="{'is-invalid': resetForm.get('password').invalid && resetForm.get('password').touched}"
+              id="validationServer01" placeholder="password">
             <div class="invalid-feedback">Please provide a password</div>
           </div>
         </div>
-        <button class="btn btn-primary btn-lg float-right mt-4" type="submit"
-        [disabled]='resetForm.invalid'>Update</button>
+        <div class="col-12">
+          <div class="d-flex justify-content-end mt-3">
+            <div *ngIf="loading" class="align-middle lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <button class="btn btn-primary btn-lg" type="submit" [disabled]='resetForm.invalid || loading'>Update</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const reviewURL = 'http://192.168.10.55:3000/campgrounds/'
+const reviewURL = 'campgrounds/'
 
 @Injectable({
   providedIn: 'root'

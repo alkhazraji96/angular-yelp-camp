@@ -13,6 +13,7 @@ export class NewPassComponent implements OnInit {
   resetForm = this.fb.group({
     password: ['', Validators.required]
   })
+  loading:boolean = false
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -24,7 +25,9 @@ export class NewPassComponent implements OnInit {
   ngOnInit(): void {
   }
   async onResetSubmit() {
+    this.loading = true
     const response = await this.authService.newPassword({ password: this.resetForm.get('password').value }, this.activatedRoute.snapshot.params.token)
+    this.loading = false
     if (response.success) {
       this.toastr.success(response.msg, 'Success')
       return this.router.navigateByUrl('login')

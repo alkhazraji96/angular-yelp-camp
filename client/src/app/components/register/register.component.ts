@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms'
-import { AuthService } from 'src/app/services/auth.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router'
+
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { SessionStorageService } from 'ngx-webstorage';
 
 
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
     username: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     avatarId: ['', Validators.required],
     bio: ['Bio']
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
 
   filename: string = 'Choose File'
   fileSelcected: File = null
-  loading:boolean = false
+  loading: boolean = false
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -52,10 +53,10 @@ export class RegisterComponent implements OnInit {
     fb.append('password', this.registerForm.get('password').value)
     fb.append('bio', this.registerForm.get('bio').value)
     const response = await this.authService.registerUser(fb)
+    this.loading = false
     if (!response.id_token) { return this.toastr.error(response.msg, 'Register Status') }
     this.sessionStorageService.store('id_token', response.id_token)
     this.toastr.success(response.msg, 'Welcome to YelpCamp!')
-    this.loading = false
     this.router.navigateByUrl('campgrounds')
   }
   async onUsernameChange() {

@@ -19,7 +19,8 @@
           </div>
           <p class="card-text">{{camp.description}}</p>
           <div class="d-flex justify-content-between align-items-baseline mb-4">
-            <h6>Avarage rating: <span *ngIf="rating > 0">{{rating}}</span><span *ngIf="rating < 1">No Rating Yet</span></h6>
+            <h6>Avarage rating: <span *ngIf="rating > 0">{{rating}}</span>
+              <span *ngIf="rating < 1">No Rating Yet</span></h6>
             <div class="flex-wrap">
               <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 0.5}"></span>
               <span class="fa fa-star" [ngClass]="{'checked' : camp.rating > 1.5}"></span>
@@ -35,7 +36,7 @@
         </div>
       </div>
       <div class="col-md-6 d-flex justify-content-center">
-        <img src="{{camp.imageURL}}" alt="">
+        <img class="mw-100 mh-100" src="{{camp.imageURL}}" alt="">
       </div>
     </div>
   </div>

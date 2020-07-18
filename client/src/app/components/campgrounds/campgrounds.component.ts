@@ -10,7 +10,7 @@ export class CampgroundsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onKeyup(event) {
+  onKeyup(event:string) {
     this.cgFilter = event    
   }
 }

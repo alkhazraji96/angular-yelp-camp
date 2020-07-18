@@ -1,14 +1,25 @@
 <app-navbar></app-navbar>
-<div class="card mt-5">
-  <div class="card-body">
-    <h3 class="mb-3">Edit the Review</h3>
-    <div class="d-flex justify-content-center">
-      <div id="sm-screen" class="w-75">
-        <textarea class="form-control" [(ngModel)]="text" rows="5">Write a review...</textarea>
-        <div class="d-flex justify-content-between">
-          <ngx-stars [wholeStars]="true" (ratingOutput)='onRatingSet($event)' [size]="2" [color]="'#007BFF'" class="mt-4">
-          </ngx-stars>
-          <button (click)='onSubmitClick()' class="btn btn-success mt-3">Edit</button>
+<div id="sm-screen" class="container">
+  <div class="card mt-5">
+    <div class="card-body">
+      <h3 class="mb-3">Edit the Review</h3>
+      <div class="d-flex justify-content-center">
+        <div id="sm-screen" class="w-75">
+          <textarea class="form-control" [(ngModel)]="text" rows="5">Write a review...</textarea>
+          <div class="d-flex justify-content-between">
+            <ngx-stars [wholeStars]="true" (ratingOutput)='onRatingSet($event)' [size]="2" [color]="'#007BFF'"
+              class="mt-4">
+            </ngx-stars>
+            <div class="d-wrap mt-3">
+              <div *ngIf="loading" class="align-middle lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <button (click)='onSubmitClick()' class="btn btn-success" [disabled]="loading">Edit</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

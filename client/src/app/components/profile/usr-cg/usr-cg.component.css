@@ -1,8 +1,8 @@
 h2 {
-    font-size: 70px;
-    line-height: normal;
-    color: rgb(64, 66, 74);
-    font-weight: 600;
-    font-family: "Josefin Sans", sans-serif;
-    text-transform: capitalize;
-  }
+  font-size: 50px;
+  line-height: normal;
+  color: rgb(64, 66, 74);
+  font-weight: 600;
+  font-family: "Josefin Sans", sans-serif;
+  text-transform: capitalize;
+}

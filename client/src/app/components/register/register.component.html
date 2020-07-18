@@ -28,8 +28,10 @@
             <input type="text" class="form-control" (change)='onUsernameChange()'
               [ngClass]="{'is-valid': registerForm.get('username').valid && registerForm.get('username').touched, 'is-invalid': registerForm.get('username').invalid && registerForm.get('username').touched }"
               formControlName="username" id="validationServer03" placeholder="Username">
-            <div *ngIf="registerForm.get('username').errors?.required" class="invalid-feedback">Please provide a username</div>
-            <div *ngIf="registerForm.get('username').errors?.usernameIsTaken" class="invalid-feedback">Username is taken</div>
+            <div *ngIf="registerForm.get('username').errors?.required" class="invalid-feedback">Please provide a
+              username</div>
+            <div *ngIf="registerForm.get('username').errors?.usernameIsTaken" class="invalid-feedback">Username is taken
+            </div>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="col-12 mb-3">
@@ -37,7 +39,10 @@
             <input type="text" class="form-control"
               [ngClass]="{'is-valid': registerForm.get('email').valid && registerForm.get('email').touched, 'is-invalid': registerForm.get('email').invalid && registerForm.get('email').touched }"
               formControlName="email" id="validationServer04" placeholder="Email">
-            <div class="invalid-feedback">Please provide an Email</div>
+            <div *ngIf="registerForm.get('email').errors?.required" class="invalid-feedback">Please provide an Email
+            </div>
+            <div *ngIf="registerForm.get('email').errors?.email" class="invalid-feedback">Please provide a valid Email
+            </div>
             <div class="valid-feedback">Looks good!</div>
           </div>
           <div class="col-12 mb-3">
@@ -50,10 +55,10 @@
           </div>
           <label for="inputGroupFile01">Image</label>
           <div class="col-12 mb-3">
-              <input type="file" (change)="onFileChange($event)" class="custom-file-input"
-                [ngClass]="{'is-valid': registerForm.get('avatarId').valid && registerForm.get('avatarId').touched, 'is-invalid': registerForm.get('avatarId').invalid && registerForm.get('avatarId').touched }"
-                formControlName="avatarId" id="inputGroupFile01" accept="image/*">
-              <label class="custom-file-label" for="inputGroupFile01">{{filename}}</label>
+            <input type="file" (change)="onFileChange($event)" class="custom-file-input"
+              [ngClass]="{'is-valid': registerForm.get('avatarId').valid && registerForm.get('avatarId').touched, 'is-invalid': registerForm.get('avatarId').invalid && registerForm.get('avatarId').touched }"
+              formControlName="avatarId" id="inputGroupFile01" accept="image/*">
+            <label class="custom-file-label" for="inputGroupFile01">{{filename}}</label>
             <div class="invalid-feedback">Please provide an image</div>
             <div class="valid-feedback">Looks good!</div>
           </div>
@@ -64,7 +69,12 @@
           <div class="col-12">
             <div class="d-flex justify-content-end">
               <div class=" my-3">
-                <div *ngIf="loading" class="align-middle lds-ring"><div></div><div></div><div></div><div></div></div>
+                <div *ngIf="loading" class="align-middle lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
                 <button class="btn btn-primary btn-lg" [disabled]="registerForm.invalid || loading">Register</button>
               </div>
             </div>

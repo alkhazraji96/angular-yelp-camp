@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { CampgroundsService } from 'src/app/services/campgrounds.service';
-import { campgroundModel } from 'src/app/models/campground';
-
 
 @Component({
   selector: 'app-card',
@@ -10,15 +8,12 @@ import { campgroundModel } from 'src/app/models/campground';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  camps: any
-  @Input() cgFilter: any = ''
+  camps: Object
+  @Input() cgFilter: Object = ''
   constructor(private campgroundService: CampgroundsService) { }
 
   async ngOnInit() {
-    // ngFor can't access array inside object it should be just an array
     const response = await this.campgroundService.getCampgrounds()
-    let campgrounds: campgroundModel = new campgroundModel()
-    campgrounds.campgrounds = response.campgrounds
-    this.camps = campgrounds.campgrounds    
+    this.camps = response.campgrounds
   }
 }
