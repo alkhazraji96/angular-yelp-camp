@@ -25,6 +25,7 @@ export class ReviewListComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.campgroundsService.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
+    if (!response) { return }
     this.reviews = response.campgrounds[0].reviews
     if (this.auth.getCurrentUser())
     this.currentUser = this.auth.getCurrentUser()._id 

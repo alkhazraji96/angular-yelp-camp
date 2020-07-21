@@ -22,6 +22,7 @@ export class ReviewEditComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.reviewService.infoReview(this.activatedRoute.snapshot.params.slug, this.activatedRoute.snapshot.params.review_id)
+    if (!response) { this.toastr.warning('Review not found'); return this.router.navigateByUrl('campgrounds') }
     this.text = response.review.text
   }
 

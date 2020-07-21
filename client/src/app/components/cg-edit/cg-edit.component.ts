@@ -29,6 +29,7 @@ export class CgEditComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.campgroundsService.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
+    if (!response) { this.toastr.warning('Campground not found'); return this.router.navigateByUrl('campgrounds') }
     this.editForm.patchValue({
       title: response.campgrounds[0].title,
       price: response.campgrounds[0].price,

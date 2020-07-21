@@ -15,6 +15,7 @@ export class UsrCgComponent implements OnInit {
 
   async ngOnInit() {
     const response = (await this.profileService.getProfile(this.activatedRoutes.snapshot.params.slug))
+    if (!response) { return }
     this.campgrounds = response.campgrounds
     this.user = response.user
   }

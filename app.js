@@ -3,7 +3,9 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  path = require('path')
+  path = require('path'),
+  compression = require('compression'),
+  helmet = require("helmet")
 
 const strategies = require('./config/strategies'),
   authRoutes = require('./routes/auth'),
@@ -13,6 +15,8 @@ reviewRoute = require('./routes/review'),
   resetPassRoute = require('./routes/reset-pass')
 
 const app = express()
+app.use(compression())
+app.use(helmet())
 
 const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }
 mongoose.connect(process.env.DB, options)

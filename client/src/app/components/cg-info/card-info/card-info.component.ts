@@ -28,6 +28,7 @@ export class CardInfoComponent implements OnInit {
 
   async ngOnInit() {
     const response = await this.campgroundService.infoCampgrounds(this.activatedRoute.snapshot.params.slug)
+    if (!response) { this.toastr.warning('Campground not found'); return this.router.navigateByUrl('campgrounds') }
     this.camp = response.campgrounds[0]
     this.author = response.campgrounds[0].author
     const num: Number = response.campgrounds[0].rating
