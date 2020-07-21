@@ -4,7 +4,7 @@ const Router = require('express').Router(),
   async = require('async'),
   User = require('../models/user')
 
-Router.post('/reset-password', (req, res, next) => {
+Router.post('/api/reset-password', (req, res, next) => {
   async.waterfall([
     (done) => {
       crypto.randomBytes(20, (err, buf) => {
@@ -56,7 +56,7 @@ Router.post('/reset-password', (req, res, next) => {
   })
 })
 
-Router.get('/reset-password/:token', (req, res) => {
+Router.get('/api/reset-password/:token', (req, res) => {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
     if (!user) {
       return res.json({ success: false, msg: 'Password reset token is invalid or has expired.' })
@@ -65,7 +65,7 @@ Router.get('/reset-password/:token', (req, res) => {
   })
 })
 
-Router.post('/reset-password/:token', (req, res) => {
+Router.post('/api/reset-password/:token', (req, res) => {
   async.waterfall([
     (done) => {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {

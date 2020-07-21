@@ -4,8 +4,8 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 
-const registerURL = 'register'
-const loginURL = 'login'
+const registerURL = '/api/register'
+const loginURL = '/api/login'
 
 @Injectable({
   providedIn: 'root'
@@ -34,15 +34,15 @@ export class AuthService {
   }
 
   resetPasswordEmail(email: Object) {
-    return this.httpClient.post<any>('reset-password', email).toPromise()
+    return this.httpClient.post<any>('/api/reset-password', email).toPromise()
   }
 
   verifyTokenPassword(token: string) {
-    return this.httpClient.get<any>('reset-password/' + token).toPromise()
+    return this.httpClient.get<any>('/api/reset-password/' + token).toPromise()
   }
 
   newPassword(password: Object, token: string) {
-    return this.httpClient.post<any>('reset-password/' + token, password).toPromise()
+    return this.httpClient.post<any>('/api/reset-password/' + token, password).toPromise()
   }
 
   onLogout() {

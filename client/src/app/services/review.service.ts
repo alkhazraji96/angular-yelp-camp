@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const reviewURL = 'campgrounds/'
+const reviewURL = '/api/campgrounds/'
 
 @Injectable({
   providedIn: 'root'

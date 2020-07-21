@@ -10,7 +10,7 @@ const Middleware = require('../config/middleware'),
 var upload = multer({ storage: multer.diskStorage(Middleware.storage), fileFilter: Middleware.imageFilter })
 cloudinary.config(Middleware.opts)
 
-Router.post('/register', upload.single('avatarId'), async (req, res, next) => {
+Router.post('/api/register', upload.single('avatarId'), async (req, res, next) => {
   if (req.body.checkUsername) {
     req.body.checkUsername = checkUsername.toLowerCase()
     const username = await User.findOne({ username: req.body.checkUsername })
@@ -46,7 +46,7 @@ Router.post('/register', upload.single('avatarId'), async (req, res, next) => {
   }
 })
 
-Router.post('/login', (req, res, next) => {
+Router.post('/api/login', (req, res, next) => {
   req.body.username = req.body.username.toLowerCase()
   passport.authenticate('login', { session: false }, (err, user, info) => {
     if (err) { console.log(err) }

@@ -5,7 +5,7 @@ const Router = require('express').Router(),
 const middlewareObj = require('../config/middleware')
 Review = require('../models/review')
 
-Router.post('/campgrounds/:slug/review', passport.authenticate('jwt', { session: false }), async (req, res) => {
+Router.post('/api/campgrounds/:slug/review', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
       const campground = await Campground.findOne({ slug: req.params.slug }).populate('reviews').exec()
       const userReview = campground.reviews.some((review) => {return review.author.equals(req.user._id)})
@@ -28,12 +28,12 @@ Router.post('/campgrounds/:slug/review', passport.authenticate('jwt', { session:
     }
 })
 
-Router.get("/campgrounds/:slug/review/:review_id/edit", passport.authenticate('jwt', { session: false }), middlewareObj.cros, async function (req, res) {
+Router.get("/api/campgrounds/:slug/review/:review_id/edit", passport.authenticate('jwt', { session: false }), middlewareObj.cros, async function (req, res) {
     const review = await Review.findOne({ _id: req.params.review_id })
     res.json({ review: review })
 })
 
-Router.put("/campgrounds/:slug/review/:review_id", passport.authenticate('jwt', { session: false }), middlewareObj.cros, async function (req, res) {
+Router.put("/api/campgrounds/:slug/review/:review_id", passport.authenticate('jwt', { session: false }), middlewareObj.cros, async function (req, res) {
 
     try {
         const review = await Review.findOne({ _id: req.params.review_id })
@@ -50,7 +50,7 @@ Router.put("/campgrounds/:slug/review/:review_id", passport.authenticate('jwt', 
     }
 })
 
-Router.delete("/campgrounds/:slug/review/:review_id", passport.authenticate('jwt', { session: false }), middlewareObj.cros, async function (req, res) {
+Router.delete("/api/campgrounds/:slug/review/:review_id", passport.authenticate('jwt', { session: false }), middlewareObj.cros, async function (req, res) {
     try {
         await Review.findByIdAndRemove(req.params.review_id)
         const campgound = await Campground.findOne({ slug: req.params.slug }).populate('reviews').exec()

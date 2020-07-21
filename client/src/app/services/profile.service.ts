@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const profileURL = 'users/'
+const profileURL = '/api/users/'
 
 @Injectable({
   providedIn: 'root'

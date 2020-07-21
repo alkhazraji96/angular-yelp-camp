@@ -13,7 +13,7 @@ var upload = multer({ storage: multer.diskStorage(Middleware.storage), fileFilte
 cloudinary.config(Middleware.opts)
 
 
-Router.get('/campgrounds', async (req, res) => {
+Router.get('/api/campgrounds', async (req, res) => {
     try {
         const campgrounds = await Campground.find({}).populate('author').exec()
         res.json({ campgrounds: campgrounds })
@@ -23,7 +23,7 @@ Router.get('/campgrounds', async (req, res) => {
     }
 })
 
-Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), upload.single('imageId'), async (req, res) => {
+Router.post('/api/campgrounds', passport.authenticate('jwt', { session: false }), upload.single('imageId'), async (req, res) => {
     try {
         let result = await cloudinary.uploader.upload(req.file.path, { folder: process.env.CAMPGROUNDIMAGEDIRECTORY })
         req.body.imageId = result.public_id
@@ -37,7 +37,7 @@ Router.post('/campgrounds', passport.authenticate('jwt', { session: false }), up
     }
 })
 
-Router.get('/campgrounds:slug', async (req, res) => {
+Router.get('/api/campgrounds:slug', async (req, res) => {
     try {
         const campgrounds = await Campground.find({ slug: req.params.slug }).populate('author').populate({ path: 'reviews', populate: { path: 'author', model: 'User' } }).exec()
         res.json({ campgrounds: campgrounds })
@@ -47,7 +47,7 @@ Router.get('/campgrounds:slug', async (req, res) => {
     }
 })
 
-Router.put('/campgrounds:slug', passport.authenticate('jwt', { session: false }), upload.single('imageId'), async (req, res) => {
+Router.put('/api/campgrounds:slug', passport.authenticate('jwt', { session: false }), upload.single('imageId'), async (req, res) => {
     try {
         const campground = await Campground.findOne({ slug: req.params.slug }).populate('author').exec()
         if (req.user._id != campground.author._id) { return res.json({ msg: 'Sorry, you are not the author!' }) }
@@ -67,7 +67,7 @@ Router.put('/campgrounds:slug', passport.authenticate('jwt', { session: false })
     }
 })
 
-Router.delete('/campgrounds:slug', passport.authenticate('jwt', { session: false }), middlewareObj.ccgos, upload.single('imageId'), async (req, res) => {
+Router.delete('/api/campgrounds:slug', passport.authenticate('jwt', { session: false }), middlewareObj.ccgos, upload.single('imageId'), async (req, res) => {
     try {
         var campground = await Campground.findOne({ slug: req.params.slug })
         await cloudinary.uploader.destroy(campground.imageId)
